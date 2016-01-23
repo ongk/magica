@@ -1,0 +1,25 @@
+{
+  "name": "magica",
+  "version": "0.1.0",
+  "description": "All the Magic the Gathering things",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ../src/index.js",
+    "postinstall": "bower install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kelly Ong",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.2",
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.1.1",
+    "wiredep": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "kerberos": "0.0.18",
+    "mongoose": "^4.3.7"
+  }
+}
