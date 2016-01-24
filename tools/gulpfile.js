@@ -4,6 +4,7 @@ var config = require('./gulp.config')(),
   del = require('del'),
   gulp = require('gulp'),
   gutil = require('gulp-util'),
+  inject = require('gulp-inject'),
   sass = require('gulp-sass'),
   wiredep = require('wiredep').stream;
   
