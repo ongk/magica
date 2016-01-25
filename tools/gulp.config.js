@@ -6,12 +6,13 @@ module.exports = function () {
     dist: '../dist/'
   };
   
-  var srcLib = paths.src + 'lib/';
+  var srcLib = paths.src + 'bower_components/';
 
   var config = {
     copyFiles: [
       paths.src + '**/*',
-      '!' + srcLib + 'jquery{,/**}',  
+      '!' + paths.src + '*.json',
+      '!' + srcLib + 'jquery{,/**}',
       '!' + srcLib + 'bootstrap-sass/assets/javascripts{,/**}',  
     ],
     
@@ -20,7 +21,7 @@ module.exports = function () {
     paths: paths,
     
     wiredep: {
-      bowerJson: require('./bower.json'),
+      bowerJson: require(paths.src + 'bower.json'),
       directory: srcLib,
       exclude: [
         srcLib + 'jquery',
