@@ -17,7 +17,7 @@ module.exports = function () {
     ],
     
     index: paths.src + 'index.html',
-    
+
     libFolders: [
       srcLib,
       paths.src + 'node_modules'
