@@ -9,7 +9,7 @@ var config = require('./gulp.config')(),
   shelljs = require('shelljs'),
   wiredep = require('wiredep').stream;
   
-gulp.task('build:copy', ['clean'], function () {
+gulp.task('build:copy', ['clean:dist', 'install'], function () {
   return gulp.src(config.copyFiles)
     .pipe(gulp.dest(config.paths.dist));
 });
@@ -24,13 +24,17 @@ gulp.task('build', ['build:inject'], function () {
   gutil.log('Building...');  
 });
 
-gulp.task('clean', function () {
+gulp.task('clean:dist', function () {
   return del(config.paths.dist + '**/*', { force: true });
 });
 
-gulp.task('install', function () {
+gulp.task('clean:src', function () {
+  return del(config.libFolders, { force: true });
+});
+
+gulp.task('install', ['clean:src'], function () {
   var CMD = 'cd ' + config.paths.src + ' && npm install';
-  shelljs.exec(CMD, { async: false });
+  return shelljs.exec(CMD, { async: false });
 });
 
 gulp.task('default', ['build'], function () {

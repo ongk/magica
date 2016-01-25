@@ -16,7 +16,12 @@ module.exports = function () {
       '!' + srcLib + 'bootstrap-sass/assets/javascripts{,/**}',  
     ],
     
-    index: paths.src + 'index.html', 
+    index: paths.src + 'index.html',
+    
+    libFolders: [
+      srcLib,
+      paths.src + 'node_modules'
+    ],
     
     paths: paths,
     
