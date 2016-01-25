@@ -8,7 +8,7 @@ var config = require('./gulp.config')(),
   sass = require('gulp-sass'),
   shelljs = require('shelljs'),
   wiredep = require('wiredep').stream;
-  
+
 gulp.task('build:copy', ['clean:dist', 'install'], function () {
   return gulp.src(config.copyFiles)
     .pipe(gulp.dest(config.paths.dist));
@@ -21,7 +21,7 @@ gulp.task('build:inject', ['build:copy'], function () {
 });
 
 gulp.task('build', ['build:inject'], function () {
-  gutil.log('Building...');  
+  gutil.log('Building...');
 });
 
 gulp.task('clean:dist', function () {
