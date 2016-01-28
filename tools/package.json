@@ -1,6 +1,6 @@
 {
   "name": "magica",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "All the Magic the Gathering things",
   "main": "server.js",
   "scripts": {
@@ -9,12 +9,17 @@
   },
   "author": "Kelly Ong",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ongk/magica.git"
+  },
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-inject": "^3.0.0",
     "gulp-sass": "^2.1.1",
     "gulp-util": "^3.0.7",
+    "run-sequence": "^1.1.5",
     "shelljs": "^0.5.3",
     "wiredep": "^3.0.0"
   },

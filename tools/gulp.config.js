@@ -12,11 +12,19 @@ module.exports = function () {
     copyFiles: [
       paths.src + '**/*',
       '!' + paths.src + '*.json',
+      '!' + paths.src + '**/*.scss',
       '!' + srcLib + 'jquery{,/**}',
       '!' + srcLib + 'bootstrap-sass/assets/javascripts{,/**}'
     ],
 
+    cssFile: paths.dist + 'index.css',
+
     index: paths.src + 'index.html',
+
+    jsFiles: [
+      paths.dist + 'app/**/*.module.js',
+      paths.dist + 'app/**/*.js'
+    ],
 
     libFolders: [
       srcLib,
@@ -24,6 +32,8 @@ module.exports = function () {
     ],
 
     paths: paths,
+
+    scssFile: paths.src + 'index.scss',
 
     wiredep: {
       bowerJson: require(paths.src + 'bower.json'),
