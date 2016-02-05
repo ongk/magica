@@ -19,11 +19,11 @@ app.get('/', function(req, res) {
 
 // import new cards
 var cardsRouter = require('./server/routes/cardRoutes');
-app.use('/api', cardsRouter(mongoose, busboy));
+app.use('/card', cardsRouter(mongoose, busboy));
 
 // import new card sets
 var cardSetRouter = require('./server/routes/cardSetRoutes');
-app.use('/api', cardSetRouter(mongoose, busboy));
+app.use('/card_set', cardSetRouter(mongoose, busboy));
 
 app.listen(port, function () {
   console.log('Listening on port: ' + port);

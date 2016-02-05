@@ -42,16 +42,21 @@ var cardModel = function (mongoose) {
   var Card = mongoose.model('card', cardSchema);
 
   return {
+    find: function (query) {
+      return Card.find(query).exec();
+    },
+    findOne: function (query) {
+      return Card.findOne(query).exec();
+    },
     get: function (id) {
-
+      return Card.findOne({ _id: id }).exec();
+    },
+    remove: function (id) {
+      return Card.findByIdAndRemove(id).exec();
     },
     save: function (data) {
       var card = new Card(data);
-      card.save(function (err) {
-        if (err) {
-          console.log(err);
-        }
-      });
+      return card.save();
     }
   };
 };

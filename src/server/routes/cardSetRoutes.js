@@ -5,7 +5,7 @@ var cardSetRoutes = function (mongoose, busboy) {
   var cardSetRouter = express.Router();
   var cardSetModel = require('../models/cardSet.js')(mongoose);
 
-  cardSetRouter.route('/cardSets')
+  cardSetRouter.route('/bulk')
     .post(function (req, res) {
       req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
         var data = '';
@@ -19,7 +19,7 @@ var cardSetRoutes = function (mongoose, busboy) {
             cardSetModel.save(content[cardSetName]);
           }
 
-          res.status(400).send('upload finished');
+          res.status(200).send('upload finished');
         });
       });
 
