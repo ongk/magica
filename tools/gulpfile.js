@@ -19,7 +19,7 @@ gulp.task('build', function (next) {
     'css',
     'build:inject',
     next
-  );
+    );
 });
 
 // Copy all production-ready files to 'dist'
@@ -29,14 +29,14 @@ gulp.task('build:copy', function () {
 });
 
 // Inject JS and CSS references in index.html
-gulp.task('build:inject', function () {
+gulp.task('build:inject', ['copy:index'], function () {
   var sources = gulp.src(
     [config.cssFile]
-    .concat(config.jsFiles), {read: false});
+      .concat(config.jsFiles), { read: false });
 
   return gulp.src(config.index)
     .pipe(wiredep(config.wiredep))
-    .pipe(inject(sources, {ignorePath: config.paths.client, addRootSlash: false}))
+    .pipe(inject(sources, { ignorePath: config.paths.client, addRootSlash: false }))
     .pipe(gulp.dest(config.paths.client));
 });
 
@@ -46,7 +46,7 @@ gulp.task('clean', function (next) {
     'clean:dist',
     'clean:src',
     next
-  );
+    );
 });
 
 // Clear 'dist'
@@ -61,7 +61,12 @@ gulp.task('clean:src', function () {
 
 gulp.task('copy:html', function () {
 	 return gulp.src(config.htmlSourceFiles)
-     .pipe(gulp.dest(config.paths.client));
+    .pipe(gulp.dest(config.paths.client));
+});
+
+gulp.task('copy:index', function () {
+  return gulp.src(config.indexSource)
+    .pipe(gulp.dest(config.paths.client));
 });
 
 gulp.task('copy:js', function (next) {
@@ -69,7 +74,7 @@ gulp.task('copy:js', function (next) {
     .pipe(gulp.dest(config.paths.client));
 
   return gulp.src(config.index)
-    .pipe(inject(gulp.src(config.jsFiles, {read:false}), {ignorePath: config.paths.client, addRootSlash: false}))
+    .pipe(inject(gulp.src(config.jsFiles, { read: false }), { ignorePath: config.paths.client, addRootSlash: false }))
     .pipe(gulp.dest(config.paths.client));
 });
 
@@ -87,6 +92,7 @@ gulp.task('install', ['clean:src'], function () {
 });
 
 gulp.task('watch', function () {
+  gulp.watch(config.indexSource, ['build:inject']);
   gulp.watch(config.htmlSourceFiles, ['copy:html']);
   gulp.watch(config.jsSourceFiles, ['copy:js']);
   gulp.watch(config.scssSourceFiles, ['css']);

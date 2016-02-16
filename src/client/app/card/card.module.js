@@ -8,7 +8,7 @@
   cardConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function cardConfig($stateProvider, $urlRouterProvider) {
-    // $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('card', {

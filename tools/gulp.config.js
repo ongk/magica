@@ -27,6 +27,8 @@ module.exports = function () {
 
     index: paths.client + 'index.html',
 
+    indexSource: paths.src + 'client/index.html',
+
     jsFiles: [
       paths.client + '**/*.module.js',
       paths.client + '**/*.js',

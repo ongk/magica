@@ -14,7 +14,7 @@
     ctrl.$state = $state;
     ctrl.$stateParams = $stateParams;
 
-    ctrl.card = null;
+    ctrl.card = {};
 
     if (angular.isDefined($stateParams.id)) {
       $http

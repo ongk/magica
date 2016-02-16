@@ -5,7 +5,7 @@
     .module('app', [
       'app.card',
       'app.cardSet',
-      'app.nav'
+      'app.navbar'
     ])
     .constant('app.basePath', 'app/');
 
