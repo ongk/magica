@@ -1,7 +1,7 @@
 var express = require('express'),
   fs = require('fs');
 
-var cardSetRoutes = function (mongoose, busboy) {
+var cardSetRoutes = function (mongoose) {
   var cardSetRouter = express.Router();
   var cardSetModel = require('../models/cardSet.js')(mongoose);
 
