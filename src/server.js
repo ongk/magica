@@ -1,6 +1,5 @@
 var express = require('express');
-var bodyParser = require('body-parser'),
-  busboy = require('connect-busboy'),
+var busboy = require('connect-busboy'),
   path = require('path'),
   mongoose = require('mongoose');
 
@@ -9,7 +8,6 @@ var port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://localhost/magica');
 
-app.use(bodyParser());
 app.use(busboy());
 app.use('/', express.static(__dirname + '/client'));
 
