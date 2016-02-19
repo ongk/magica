@@ -16,8 +16,11 @@ var cardSetModel = function (mongoose) {
   var CardSet = mongoose.model('cardSet', cardSetSchema);
 
   return {
+    all: function () {
+      return CardSet.find().exec();
+    },
     get: function (id) {
-
+      return CardSet.findOne({ _id: id }).exec();
     },
     save: function (data) {
       var cardSet = new CardSet(data);

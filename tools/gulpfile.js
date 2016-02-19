@@ -19,7 +19,7 @@ gulp.task('build', function (next) {
     'css',
     'build:inject',
     next
-  );
+    );
 });
 
 // Copy all production-ready files to 'dist'
@@ -29,15 +29,15 @@ gulp.task('build:copy', function () {
 });
 
 // Inject JS and CSS references in index.html
-gulp.task('build:inject', function () {
+gulp.task('build:inject', ['copy:index'], function () {
   var sources = gulp.src(
     [config.cssFile]
-    .concat(config.jsFiles), {read: false});
+      .concat(config.jsFiles), { read: false });
 
   return gulp.src(config.index)
     .pipe(wiredep(config.wiredep))
-    .pipe(inject(sources, {ignorePath: config.paths.dist, addRootSlash: false}))
-    .pipe(gulp.dest(config.paths.dist));
+    .pipe(inject(sources, { ignorePath: config.paths.client, addRootSlash: false }))
+    .pipe(gulp.dest(config.paths.client));
 });
 
 // Clean 'dist' and 'src'
@@ -46,7 +46,7 @@ gulp.task('clean', function (next) {
     'clean:dist',
     'clean:src',
     next
-  );
+    );
 });
 
 // Clear 'dist'
@@ -59,17 +59,43 @@ gulp.task('clean:src', function () {
   return del(config.libFolders, { force: true });
 });
 
+gulp.task('copy:html', function () {
+	 return gulp.src(config.htmlSourceFiles)
+    .pipe(gulp.dest(config.paths.client));
+});
+
+gulp.task('copy:index', function () {
+  return gulp.src(config.indexSource)
+    .pipe(gulp.dest(config.paths.client));
+});
+
+gulp.task('copy:js', function (next) {
+  gulp.src(config.jsSourceFiles)
+    .pipe(gulp.dest(config.paths.client));
+
+  return gulp.src(config.index)
+    .pipe(inject(gulp.src(config.jsFiles, { read: false }), { ignorePath: config.paths.client, addRootSlash: false }))
+    .pipe(gulp.dest(config.paths.client));
+});
+
 // Compile to CSS
 gulp.task('css', function () {
   return gulp.src(config.scssFile)
     .pipe(sass())
-    .pipe(gulp.dest(config.paths.dist));
+    .pipe(gulp.dest(config.paths.client));
 });
 
 // Install Node.js modules and Bower packages in 'src'
 gulp.task('install', ['clean:src'], function () {
   var CMD = 'cd ' + config.paths.src + ' && npm install';
   return shelljs.exec(CMD, { async: false });
+});
+
+gulp.task('watch', function () {
+  gulp.watch(config.indexSource, ['build:inject']);
+  gulp.watch(config.htmlSourceFiles, ['copy:html']);
+  gulp.watch(config.jsSourceFiles, ['copy:js']);
+  gulp.watch(config.scssSourceFiles, ['css']);
 });
 
 // Default task: build

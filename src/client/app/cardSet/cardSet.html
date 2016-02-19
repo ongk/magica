@@ -1,0 +1,14 @@
+<div class="col-sm-12">
+  <h1>Card Sets</h1>
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr><th>Name</th><th>Released</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cardSet in cardSetCtrl.cardSets track by cardSet._id">
+        <td><a ui-sref="cardSetDetail({ id: cardSet._id })">{{cardSet.name}}</a></td>
+        <td>{{cardSet.releaseDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

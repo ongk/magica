@@ -5,8 +5,9 @@ module.exports = function () {
     src: '../src/',
     dist: '../dist/'
   };
+  paths.client = paths.dist + 'client/';
 
-  var srcLib = paths.src + 'bower_components/';
+  var srcLib = paths.src + 'client/lib/';
 
   var config = {
     copyFiles: [
@@ -17,13 +18,26 @@ module.exports = function () {
       '!' + srcLib + 'bootstrap-sass/assets/javascripts{,/**}'
     ],
 
-    cssFile: paths.dist + 'index.css',
+    cssFile: paths.client + 'index.css',
 
-    index: paths.src + 'index.html',
+    htmlSourceFiles: [
+      paths.src + 'client/**/*.html',
+      '!' + paths.src + 'client/index.html'
+    ],
+
+    index: paths.client + 'index.html',
+
+    indexSource: paths.src + 'client/index.html',
 
     jsFiles: [
-      paths.dist + 'app/**/*.module.js',
-      paths.dist + 'app/**/*.js'
+      paths.client + '**/*.module.js',
+      paths.client + '**/*.js',
+      '!' + paths.client + 'lib/**/*.js'
+    ],
+
+    jsSourceFiles: [
+      paths.src + 'client/**/*.js',
+      '!' + paths.src + 'client/lib/**/*.js'
     ],
 
     libFolders: [
@@ -33,7 +47,9 @@ module.exports = function () {
 
     paths: paths,
 
-    scssFile: paths.src + 'index.scss',
+    scssFile: paths.src + 'client/index.scss',
+
+    scssSourceFiles: paths.src + 'client/**/*.scss',
 
     wiredep: {
       bowerJson: require(paths.src + 'bower.json'),
@@ -42,7 +58,7 @@ module.exports = function () {
         srcLib + 'jquery',
         srcLib + 'bootstrap-sass/assets/javascripts'
       ],
-      ignorePath: paths.src
+      ignorePath: '../' + paths.src + 'client/'
     },
   }
 
